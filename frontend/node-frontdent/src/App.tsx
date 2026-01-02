@@ -1,19 +1,26 @@
 import { useState, useEffect } from "react";
+import { useAuth } from "./context/AuthContext";
 import { todoApi } from "./services/api";
 import type { Todo } from "./types/todo";
+import { Login } from "./components/Login";
+import { Signup } from "./components/Signup";
 import "./App.css";
 
 function App() {
+  const { user, logout, loading: authLoading } = useAuth();
   const [todos, setTodos] = useState<Todo[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [newTodoTitle, setNewTodoTitle] = useState("");
   const [editingId, setEditingId] = useState<number | null>(null);
   const [editTitle, setEditTitle] = useState("");
+  const [showSignup, setShowSignup] = useState(false);
 
   useEffect(() => {
-    loadTodos();
-  }, []);
+    if (user) {
+      loadTodos();
+    }
+  }, [user]);
 
   const loadTodos = async () => {
     try {
@@ -91,9 +98,65 @@ function App() {
     }
   };
 
+  if (authLoading) {
+    return (
+      <div className="app">
+        <div className="loading">Loading...</div>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return (
+      <div className="app">
+        {showSignup ? <Signup /> : <Login />}
+        <div style={{ textAlign: "center", marginTop: "1rem" }}>
+          {showSignup ? (
+            <>
+              Already have an account?{" "}
+              <button
+                onClick={() => setShowSignup(false)}
+                className="btn btn-secondary"
+                style={{ marginLeft: "0.5rem" }}
+              >
+                Login
+              </button>
+            </>
+          ) : (
+            <>
+              Don't have an account?{" "}
+              <button
+                onClick={() => setShowSignup(true)}
+                className="btn btn-secondary"
+                style={{ marginLeft: "0.5rem" }}
+              >
+                Sign Up
+              </button>
+            </>
+          )}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="app">
-      <h1>Todo App</h1>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          marginBottom: "2rem",
+        }}
+      >
+        <h1>Todo App</h1>
+        <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+          <span style={{ color: "#666" }}>{user.email}</span>
+          <button onClick={logout} className="btn btn-secondary">
+            Logout
+          </button>
+        </div>
+      </div>
 
       <form onSubmit={handleCreate} className="todo-form">
         <input
