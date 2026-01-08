@@ -1,4 +1,9 @@
-import type { Todo, CreateTodoData, UpdateTodoData } from "../types/todo";
+import type {
+  Todo,
+  CreateTodoData,
+  UpdateTodoData,
+  TodosResponse,
+} from "../types/todo";
 
 const API_BASE_URL = "http://localhost:4000/todos";
 
@@ -11,10 +16,13 @@ const getHeaders = () => {
 };
 
 export const todoApi = {
-  async getAll(): Promise<Todo[]> {
-    const response = await fetch(API_BASE_URL, {
-      headers: getHeaders(),
-    });
+  async getAll(page = 1, limit = 10): Promise<TodosResponse> {
+    const response = await fetch(
+      `${API_BASE_URL}?page=${page}&limit=${limit}`,
+      {
+        headers: getHeaders(),
+      }
+    );
     if (!response.ok) throw new Error("Failed to fetch todos");
     return response.json();
   },

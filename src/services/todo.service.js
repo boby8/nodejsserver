@@ -8,9 +8,28 @@ export const createTodo = async (data) => {
   return result.rows[0];
 };
 
-export const getTodos = async () => {
-  const result = await pool.query("SELECT * FROM todos ORDER BY created_at DESC");
-  return result.rows;
+export const getTodos = async (page = 1, limit = 10) => {
+  const offset = (page - 1) * limit;
+
+  // Get todos with pagination
+  const result = await pool.query(
+    "SELECT * FROM todos ORDER BY created_at DESC LIMIT $1 OFFSET $2",
+    [limit, offset]
+  );
+
+  // Get total count
+  const countResult = await pool.query("SELECT COUNT(*) FROM todos");
+  const total = parseInt(countResult.rows[0].count);
+
+  return {
+    todos: result.rows,
+    pagination: {
+      page: parseInt(page),
+      limit: parseInt(limit),
+      total,
+      pages: Math.ceil(total / limit),
+    },
+  };
 };
 
 export const getTodoById = async (id) => {

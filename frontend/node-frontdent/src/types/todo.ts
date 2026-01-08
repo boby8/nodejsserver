@@ -15,3 +15,15 @@ export interface UpdateTodoData {
   title?: string;
   completed?: boolean;
 }
+
+export interface PaginationInfo {
+  page: number;
+  limit: number;
+  total: number;
+  pages: number;
+}
+
+export interface TodosResponse {
+  todos: Todo[];
+  pagination: PaginationInfo;
+}
