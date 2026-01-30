@@ -46,7 +46,6 @@ function App() {
   };
 
   const handleDelete = async (id: number) => {
-    if (!confirm("Are you sure you want to delete this todo?")) return;
     await deleteTodo(id);
   };
 

@@ -149,3 +149,103 @@ h1 {
   border-radius: 4px;
   outline: none;
 }
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  max-width: 400px;
+  width: 90%;
+  animation: slideUp 0.2s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal-content h3 {
+  margin: 0 0 1rem 0;
+  color: #333;
+  font-size: 1.5rem;
+}
+
+.modal-content p {
+  margin: 0 0 1.5rem 0;
+  color: #666;
+  line-height: 1.5;
+}
+
+.modal-content p strong {
+  color: #333;
+  font-weight: 600;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.modal-actions .btn {
+  min-width: 100px;
+}
+
+/* Improved Todo Item Styles */
+.todo-item {
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.todo-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.todo-actions .btn {
+  transition: all 0.2s;
+}
+
+.todo-actions .btn:hover {
+  transform: scale(1.05);
+}
+
+.todo-actions .btn-danger:hover {
+  background-color: #c82333;
+}
+
+.todo-actions .btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}

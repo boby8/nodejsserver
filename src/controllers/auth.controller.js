@@ -13,7 +13,6 @@ export const signup = async (req, res, next) => {
       await emailService.sendVerificationEmail(email, user.verification_token);
     } catch (emailErr) {
       console.error("Failed to send verification email:", emailErr);
-      // Don't fail signup if email fails
     }
 
     res.status(201).json({
