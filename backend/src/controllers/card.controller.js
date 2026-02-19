@@ -41,7 +41,11 @@ export const getCardById = async (req, res, next) => {
 
 export const updateCard = async (req, res, next) => {
   try {
-    const card = await cardService.updateCard(req.params.id, req.body);
+    const { id, ...data } = req.body;
+    if (!id) {
+      return res.status(400).json({ error: "Card id is required" });
+    }
+    const card = await cardService.updateCard(id, data);
     res.json(card);
   } catch (err) {
     next(err);
@@ -50,7 +54,11 @@ export const updateCard = async (req, res, next) => {
 
 export const deleteCard = async (req, res, next) => {
   try {
-    await cardService.deleteCard(req.params.id);
+    const { id } = req.body;
+    if (!id) {
+      return res.status(400).json({ error: "Card id is required" });
+    }
+    await cardService.deleteCard(id);
     res.status(204).send();
   } catch (err) {
     next(err);

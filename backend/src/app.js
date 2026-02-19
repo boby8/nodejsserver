@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import rateLimit from "express-rate-limit";
 import swaggerUi from "swagger-ui-express";
 import { swaggerSpec } from "./config/swagger.js";
 import cardRoutes from "./routes/card.route.js";
@@ -10,6 +11,15 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // max requests per window
+  message: { error: "Too many requests, please try again later." },
+  standardHeaders: true, // X-RateLimit-* headers
+  legacyHeaders: false,
+});
+app.use(limiter);
 
 // Swagger Documentation
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));

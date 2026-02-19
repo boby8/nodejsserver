@@ -9,10 +9,10 @@ import {
 
 const router = Router();
 
-router.get("/", getCards);
-router.post("/", createCard);
-router.get("/:id", getCardById);
-router.put("/:id", updateCard);
-router.delete("/:id", deleteCard);
+router.get("/list", getCards);
+router.get("/get/:id", getCardById);
+router.post("/persist", createCard);
+router.put("/update", updateCard);
+router.delete("/delete", deleteCard);
 
 export default router;

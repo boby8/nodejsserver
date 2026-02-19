@@ -6,3 +6,11 @@ app.listen(env.port, () => {
   console.log(`🚀 Server running on port ${env.port}`);
 });
 
+// import http from "http";
+// import app from "./app.js";
+
+// const server = http.createServer(app);
+
+// server.listen(5000, () => {
+//   console.log("Server running");
+// });
