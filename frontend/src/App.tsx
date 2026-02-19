@@ -1,16 +1,27 @@
 import { useState } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { useAuth } from "./context/AuthContext";
 import { Login } from "./components/Login";
 import { Signup } from "./components/Signup";
 import { AuthSwitch } from "./components/AuthSwitch";
 import { Nav } from "./components/Nav";
 import { CardsPage } from "./pages/CardsPage";
+import { VerifyEmail } from "./pages/VerifyEmail";
 import "./App.css";
 
 function App() {
   const { user, logout, loading: authLoading } = useAuth();
   const [showSignup, setShowSignup] = useState(false);
+  const location = useLocation();
+
+  // Email verification link (no login required)
+  if (location.pathname === "/verify-email") {
+    return (
+      <div className="app">
+        <VerifyEmail />
+      </div>
+    );
+  }
 
   if (authLoading) {
     return (

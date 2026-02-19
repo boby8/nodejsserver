@@ -5,6 +5,7 @@ import swaggerUi from "swagger-ui-express";
 import { swaggerSpec } from "./config/swagger.js";
 import cardRoutes from "./routes/card.route.js";
 import authRoutes from "./routes/auth.route.js";
+import { authenticate } from "./middlewares/auth.middleware.js";
 import { errorHandler } from "./middlewares/error.middleware.js";
 
 const app = express();
@@ -25,7 +26,7 @@ app.use(limiter);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use("/auth", authRoutes);
-app.use("/cards", cardRoutes);
+app.use("/cards", authenticate, cardRoutes);
 
 app.use(errorHandler);
 
