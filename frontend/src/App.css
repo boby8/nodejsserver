@@ -1,3 +1,30 @@
+.app-nav {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.nav-link {
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  color: #666;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.nav-link:hover {
+  color: #333;
+  background: #f8f9fa;
+}
+
+.nav-link.active {
+  color: #646cff;
+  font-weight: 600;
+  background: #f0f0ff;
+}
+
 .app {
   max-width: 800px;
   margin: 0 auto;
@@ -8,26 +35,6 @@ h1 {
   text-align: center;
   margin-bottom: 2rem;
   color: #333;
-}
-
-.todo-form {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 2rem;
-}
-
-.todo-input {
-  flex: 1;
-  padding: 0.75rem;
-  font-size: 1rem;
-  border: 2px solid #ddd;
-  border-radius: 4px;
-  outline: none;
-  transition: border-color 0.2s;
-}
-
-.todo-input:focus {
-  border-color: #646cff;
 }
 
 .btn {
@@ -84,70 +91,6 @@ h1 {
   text-align: center;
   padding: 2rem;
   color: #666;
-}
-
-.todo-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.todo-item {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 1rem;
-  margin-bottom: 0.5rem;
-  background-color: #f8f9fa;
-  border-radius: 4px;
-  transition: background-color 0.2s;
-}
-
-.todo-item:hover {
-  background-color: #e9ecef;
-}
-
-.todo-item.completed {
-  opacity: 0.7;
-}
-
-.todo-checkbox {
-  width: 1.25rem;
-  height: 1.25rem;
-  cursor: pointer;
-  }
-
-.todo-title {
-  flex: 1;
-  cursor: pointer;
-  word-break: break-word;
-  text-align: center;
-}
-
-.todo-item.completed .todo-title {
-  text-decoration: line-through;
-  color: #666;
-}
-
-.todo-actions {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.todo-edit {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  flex: 1;
-}
-
-.todo-edit-input {
-  flex: 1;
-  padding: 0.5rem;
-  font-size: 1rem;
-  border: 2px solid #646cff;
-  border-radius: 4px;
-  outline: none;
 }
 
 /* Modal Styles */
@@ -222,30 +165,3 @@ h1 {
   min-width: 100px;
 }
 
-/* Improved Todo Item Styles */
-.todo-item {
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.todo-item:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.todo-actions .btn {
-  transition: all 0.2s;
-}
-
-.todo-actions .btn:hover {
-  transform: scale(1.05);
-}
-
-.todo-actions .btn-danger:hover {
-  background-color: #c82333;
-}
-
-.todo-actions .btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-  transform: none;
-}

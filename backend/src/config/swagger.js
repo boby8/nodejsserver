@@ -4,9 +4,9 @@ const options = {
   definition: {
     openapi: "3.0.0",
     info: {
-      title: "Todo API",
+      title: "Cards API",
       version: "1.0.0",
-      description: "A RESTful API for managing todos with authentication",
+      description: "A RESTful API for managing cards with authentication",
       contact: {
         name: "API Support",
       },
@@ -49,20 +49,20 @@ const options = {
             },
           },
         },
-        Todo: {
+        Card: {
           type: "object",
           properties: {
             id: {
               type: "integer",
-              description: "Todo ID",
+              description: "Card ID",
             },
             title: {
               type: "string",
-              description: "Todo title",
+              description: "Card title",
             },
-            completed: {
-              type: "boolean",
-              description: "Whether todo is completed",
+            description: {
+              type: "string",
+              description: "Card description",
             },
             created_at: {
               type: "string",
@@ -73,34 +73,6 @@ const options = {
               type: "string",
               format: "date-time",
               description: "Last update date",
-            },
-          },
-        },
-        TodosResponse: {
-          type: "object",
-          properties: {
-            todos: {
-              type: "array",
-              items: {
-                $ref: "#/components/schemas/Todo",
-              },
-            },
-            pagination: {
-              type: "object",
-              properties: {
-                page: {
-                  type: "integer",
-                },
-                limit: {
-                  type: "integer",
-                },
-                total: {
-                  type: "integer",
-                },
-                pages: {
-                  type: "integer",
-                },
-              },
             },
           },
         },

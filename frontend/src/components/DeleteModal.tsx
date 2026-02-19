@@ -4,6 +4,7 @@ interface DeleteModalProps {
   onConfirm: () => void;
   onCancel: () => void;
   isDeleting?: boolean;
+  itemLabel?: string;
 }
 
 export const DeleteModal = ({
@@ -12,13 +13,14 @@ export const DeleteModal = ({
   onConfirm,
   onCancel,
   isDeleting = false,
+  itemLabel = "Todo",
 }: DeleteModalProps) => {
   if (!isOpen) return null;
 
   return (
     <div className="modal-overlay" onClick={onCancel}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        <h3>Delete Todo</h3>
+        <h3>Delete {itemLabel}</h3>
         <p>
           Are you sure you want to delete <strong>"{todoTitle}"</strong>? This
           action cannot be undone.
