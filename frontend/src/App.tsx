@@ -1,9 +1,6 @@
-import { useState } from "react";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { useAuth } from "./context/AuthContext";
-import { Login } from "./components/Login";
-import { Signup } from "./components/Signup";
-import { AuthSwitch } from "./components/AuthSwitch";
+import { AuthPage } from "./pages/AuthPage";
 import { Nav } from "./components/Nav";
 import { CardsPage } from "./pages/CardsPage";
 import { VerifyEmail } from "./pages/VerifyEmail";
@@ -11,7 +8,6 @@ import "./App.css";
 
 function App() {
   const { user, logout, loading: authLoading } = useAuth();
-  const [showSignup, setShowSignup] = useState(false);
   const location = useLocation();
 
   // Email verification link (no login required)
@@ -32,15 +28,7 @@ function App() {
   }
 
   if (!user) {
-    return (
-      <div className="app">
-        {showSignup ? <Signup /> : <Login />}
-        <AuthSwitch
-          isSignup={showSignup}
-          onToggle={() => setShowSignup(!showSignup)}
-        />
-      </div>
-    );
+    return <AuthPage />;
   }
 
   return (

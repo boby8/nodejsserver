@@ -31,4 +31,3 @@ app.use("/cards", authenticate, cardRoutes);
 app.use(errorHandler);
 
 export default app;
-
